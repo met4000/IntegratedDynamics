@@ -1,0 +1,11 @@
+As always, don't forget to backup your world before updating!
+Requires CyclopsCore version 1.18.4 or higher.
+
+Fixes:
+* Revert "Optimize ingredient positions index"
+  This reverts commit 61b7372bda5cde123a2b320ac92c1c24d2dfb9b1.
+  Closes CyclopsMC/IntegratedTerminals#134
+* Fix crash when invalidating invalid network elements
+  This could occur when using AE2's Spatial IO.
+  Closes #1410
+
