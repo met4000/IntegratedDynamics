@@ -9,7 +9,6 @@ import org.cyclops.cyclopscore.ingredient.collection.IIngredientCollapsedCollect
 import org.cyclops.cyclopscore.ingredient.collection.IIngredientMapMutable;
 import org.cyclops.cyclopscore.ingredient.collection.IngredientCollectionHelpers;
 import org.cyclops.cyclopscore.ingredient.collection.IngredientHashMap;
-import org.cyclops.cyclopscore.ingredient.collection.IngredientMapSingleClassified;
 import org.cyclops.integrateddynamics.api.ingredient.IIngredientPositionsIndex;
 import org.cyclops.integrateddynamics.api.part.PartPos;
 import org.cyclops.integrateddynamics.api.part.PrioritizedPartPos;
@@ -67,7 +66,7 @@ public class IngredientPositionsIndex<T, M> implements IIngredientPositionsIndex
     public void addPosition(T instance, PrioritizedPartPos pos) {
         IIngredientMapMutable<T, M, ObjectOpenHashSet<PartPos>> positionsMap = this.prioritizedPositionsMap.get(getInternalPriority(pos));
         if (positionsMap == null) {
-            positionsMap = createCollapsedMap(getComponent());
+            positionsMap = new IngredientHashMap<>(getComponent());
             this.prioritizedPositionsMap.put(getInternalPriority(pos), positionsMap);
         }
 
@@ -79,17 +78,6 @@ public class IngredientPositionsIndex<T, M> implements IIngredientPositionsIndex
         }
 
         set.add(pos.getPartPos());
-    }
-
-    // If this would ever be needed in other places as well, let's move this to IngredientCollectionHelpers
-    protected static <T, M> IIngredientMapMutable<T, M, ObjectOpenHashSet<PartPos>> createCollapsedMap(IngredientComponent<T, M> ingredientComponent) {
-        if (ingredientComponent.getCategoryTypes().size() == 1) {
-            return new IngredientHashMap<>(ingredientComponent);
-        }
-        return new IngredientMapSingleClassified<>(
-                ingredientComponent,
-                () -> new IngredientHashMap<>(ingredientComponent),
-                ingredientComponent.getCategoryTypes().get(0));
     }
 
     @Override
