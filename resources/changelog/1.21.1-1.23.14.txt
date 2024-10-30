@@ -1,0 +1,13 @@
+As always, don't forget to backup your world before updating!
+Requires CyclopsCore version 1.25.1 or higher.
+
+Fixes:
+* Fix crash with complex Integrated Scripting functions in writers
+
+Functions returning an any type could be inserted into writers such as
+Integrated Tunnels exporters, and type checking would incorrectly pass.
+This could result in crashes where an incorrect value cast would occur.
+This commit makes it so that ANY types will have an additional type
+check based on the actual determined value.
+
+Closes CyclopsMC/IntegratedScripting#20
