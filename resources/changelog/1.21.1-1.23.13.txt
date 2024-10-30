@@ -1,0 +1,8 @@
+As always, don't forget to backup your world before updating!
+Requires CyclopsCore version 1.25.1 or higher.
+
+Fixes:
+* Revert "Optimize ingredient positions index"
+  This reverts commit 8f53b7eb53302e5028d1b4414caf288d26eb73ee.
+  Closes CyclopsMC/IntegratedTerminals#134
+
