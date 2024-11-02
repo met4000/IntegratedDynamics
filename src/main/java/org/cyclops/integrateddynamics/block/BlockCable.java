@@ -387,10 +387,10 @@ public class BlockCable extends BlockWithEntity implements IDynamicModelElement,
     @Override
     public int getLightBlock(BlockState blockState, BlockGetter world, BlockPos pos) {
         if (world instanceof Level level) {
-            if (CableHelpers.isLightTransparent(level, pos, null)) {
+            if (CableHelpers.isLightTransparent(level, pos, null, blockState)) {
                 return 0;
             }
-            return CableHelpers.getFacade(level, pos)
+            return CableHelpers.getFacade(level, pos, blockState)
                     .map(facade -> facade.getLightBlock(world, pos))
                     .orElse(0);
         }

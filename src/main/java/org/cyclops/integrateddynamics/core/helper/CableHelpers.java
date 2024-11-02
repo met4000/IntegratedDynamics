@@ -395,8 +395,34 @@ public class CableHelpers {
                 .flatMap(facadeable -> Optional.ofNullable(facadeable.getFacade()));
     }
 
+    /**
+     * Get the target's facade
+     * @param world The world.
+     * @param pos The position.
+     * @param blockState The block state.
+     * @return The optional facade.
+     */
+    public static Optional<BlockState> getFacade(ILevelExtension world, BlockPos pos, BlockState blockState) {
+        return Optional.ofNullable(world.getCapability(Capabilities.Facadeable.BLOCK, pos, blockState, null, null))
+                .flatMap(facadeable -> Optional.ofNullable(facadeable.getFacade()));
+    }
+
     public static boolean isLightTransparent(Level world, BlockPos pos, @Nullable Direction side) {
         return PartHelpers.getPartContainer(world, pos, side)
+                .map(partContainer -> {
+                    for (Map.Entry<Direction, IPartType<?, ?>> entry : partContainer.getParts().entrySet()) {
+                        IPartType part = entry.getValue();
+                        if (part.forceLightTransparency(partContainer.getPartState(entry.getKey()))) {
+                            return true;
+                        }
+                    }
+                    return false;
+                })
+                .orElse(false);
+    }
+
+    public static boolean isLightTransparent(Level world, BlockPos pos, @Nullable Direction side, BlockState blockState) {
+        return PartHelpers.getPartContainer(world, pos, side, blockState)
                 .map(partContainer -> {
                     for (Map.Entry<Direction, IPartType<?, ?>> entry : partContainer.getParts().entrySet()) {
                         IPartType part = entry.getValue();

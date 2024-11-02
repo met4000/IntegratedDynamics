@@ -16,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.extensions.ILevelExtension;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
@@ -61,6 +62,18 @@ public class PartHelpers {
      */
     public static Optional<IPartContainer> getPartContainer(ILevelExtension world, BlockPos pos, @Nullable Direction side) {
         return BlockEntityHelpers.getCapability(world, pos, side, Capabilities.PartContainer.BLOCK);
+    }
+
+    /**
+     * Get the part container capability at the given position.
+     * @param world The world.
+     * @param pos The position.
+     * @param side The side.
+     * @param blockState The block state.
+     * @return The optional part container capability.
+     */
+    public static Optional<IPartContainer> getPartContainer(ILevelExtension world, BlockPos pos, @Nullable Direction side, BlockState blockState) {
+        return Optional.ofNullable(world.getCapability(Capabilities.PartContainer.BLOCK, pos, blockState, null, side));
     }
 
     /**
