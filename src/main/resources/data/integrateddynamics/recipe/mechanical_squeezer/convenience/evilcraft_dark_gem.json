@@ -1,7 +1,7 @@
 {
   "type": "integrateddynamics:mechanical_squeezer",
   "input_item": {
-    "item": "evilcraft:dark_ore"
+    "tag": "evilcraft:dark_ores"
   },
   "output_items": [
     {
