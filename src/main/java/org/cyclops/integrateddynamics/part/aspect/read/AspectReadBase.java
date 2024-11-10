@@ -23,6 +23,8 @@ import org.cyclops.integrateddynamics.core.part.aspect.LazyAspectVariable;
 import org.cyclops.integrateddynamics.part.aspect.AspectBase;
 import org.cyclops.integrateddynamics.part.aspect.Aspects;
 
+import java.util.function.Supplier;
+
 /**
  * Base class for read aspects.
  * @author rubensworks
@@ -73,11 +75,11 @@ public abstract class AspectReadBase<V extends IValue, T extends IValueType<V>> 
     protected abstract V getValue(PartTarget target, IAspectProperties properties) throws EvaluationException;
 
     @Override
-    public IAspectVariable<V> createNewVariable(final PartTarget target) {
+    public IAspectVariable<V> createNewVariable(Supplier<PartTarget> target) {
         return new LazyAspectVariable<V>(getValueType(), target, this) {
             @Override
             public V getValueLazy() throws EvaluationException {
-                return AspectReadBase.this.getValue(target, getAspectProperties());
+                return AspectReadBase.this.getValue(getTarget(), getAspectProperties());
             }
         };
     }

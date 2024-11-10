@@ -127,7 +127,7 @@ public abstract class PartTypeReadBase<P extends IPartTypeReader<P, S>, S extend
                 throw new IllegalArgumentException(String.format("Tried to get the variable for the aspect %s that did not exist within the " +
                         "part type %s.", aspect.getUniqueName(), this));
             }
-            variable = aspect.createNewVariable(target);
+            variable = aspect.createNewVariable(() -> getTarget(target.getCenter(), partState));
             partState.setVariable(aspect, variable);
         }
         return variable;
