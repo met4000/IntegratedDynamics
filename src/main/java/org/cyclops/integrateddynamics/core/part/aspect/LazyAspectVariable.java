@@ -17,6 +17,8 @@ import org.cyclops.integrateddynamics.api.part.aspect.IAspectVariable;
 import org.cyclops.integrateddynamics.api.part.aspect.property.IAspectProperties;
 import org.cyclops.integrateddynamics.core.helper.L10NValues;
 
+import java.util.function.Supplier;
+
 /**
  * Variable for a specific aspect from a part that calculates its target value only maximum once per ticking interval.
  * No calculations will be done if the value of this variable is not called.
@@ -25,17 +27,26 @@ import org.cyclops.integrateddynamics.core.helper.L10NValues;
 public abstract class LazyAspectVariable<V extends IValue> extends VariableAdapter<V> implements IAspectVariable<V> {
 
     @Getter private final IValueType<V> type;
-    @Getter private final PartTarget target;
+    private final Supplier<PartTarget> targetSupplier;
     @Getter private final IAspectRead<V, ?> aspect;
     @NonNull private V value;
     private IAspectProperties cachedProperties = null;
 
     private boolean isGettingValue = false;
 
-    public LazyAspectVariable(IValueType<V> type, PartTarget target, IAspectRead<V, ?> aspect) {
+    public LazyAspectVariable(IValueType<V> type, Supplier<PartTarget> targetSupplier, IAspectRead<V, ?> aspect) {
         this.type = type;
-        this.target = target;
+        this.targetSupplier = targetSupplier;
         this.aspect = aspect;
+    }
+
+    @Deprecated // TODO: rm in next major
+    public LazyAspectVariable(IValueType<V> type, PartTarget target, IAspectRead<V, ?> aspect) {
+        this(type, () -> target, aspect);
+    }
+
+    public PartTarget getTarget() {
+        return targetSupplier.get();
     }
 
     @Override
