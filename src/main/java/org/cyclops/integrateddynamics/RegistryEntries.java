@@ -12,25 +12,13 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraftforge.registries.ObjectHolder;
-import org.cyclops.integrateddynamics.block.BlockCable;
-import org.cyclops.integrateddynamics.block.BlockDryingBasin;
-import org.cyclops.integrateddynamics.block.BlockEnergyBattery;
-import org.cyclops.integrateddynamics.block.BlockFluidLiquidChorus;
-import org.cyclops.integrateddynamics.block.BlockFluidMenrilResin;
-import org.cyclops.integrateddynamics.block.BlockMechanicalDryingBasin;
-import org.cyclops.integrateddynamics.block.BlockMechanicalSqueezer;
-import org.cyclops.integrateddynamics.block.BlockSqueezer;
+import org.cyclops.integrateddynamics.block.*;
 import org.cyclops.integrateddynamics.blockentity.*;
 import org.cyclops.integrateddynamics.core.blockentity.BlockEntityMultipartTicking;
 import org.cyclops.integrateddynamics.core.inventory.container.ContainerAspectSettings;
 import org.cyclops.integrateddynamics.core.inventory.container.ContainerPartSettings;
 import org.cyclops.integrateddynamics.core.item.ItemBlockEnergyContainer;
-import org.cyclops.integrateddynamics.core.recipe.type.RecipeDryingBasin;
-import org.cyclops.integrateddynamics.core.recipe.type.RecipeEnergyContainerCombination;
-import org.cyclops.integrateddynamics.core.recipe.type.RecipeMechanicalDryingBasin;
-import org.cyclops.integrateddynamics.core.recipe.type.RecipeMechanicalSqueezer;
-import org.cyclops.integrateddynamics.core.recipe.type.RecipeNbtClear;
-import org.cyclops.integrateddynamics.core.recipe.type.RecipeSqueezer;
+import org.cyclops.integrateddynamics.core.recipe.type.*;
 import org.cyclops.integrateddynamics.inventory.container.*;
 import org.cyclops.integrateddynamics.item.ItemEnhancement;
 import org.cyclops.integrateddynamics.item.ItemFacade;
@@ -95,6 +83,8 @@ public class RegistryEntries {
     public static final BlockDryingBasin BLOCK_DRYING_BASIN = null;
     @ObjectHolder(registryName = "block", value = "integrateddynamics:energy_battery")
     public static final BlockEnergyBattery BLOCK_ENERGY_BATTERY = null;
+    @ObjectHolder(registryName = "block", value = "integrateddynamics:energy_battery_creative")
+    public static final BlockCreativeEnergyBattery BLOCK_ENERGY_BATTERY_CREATIVE = null;
     @ObjectHolder(registryName = "block", value = "integrateddynamics:block_liquid_chorus")
     public static final BlockFluidLiquidChorus BLOCK_FLUID_LIQUID_CHORUS = null;
     @ObjectHolder(registryName = "block", value = "integrateddynamics:block_menril_resin")
