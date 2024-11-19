@@ -157,6 +157,9 @@ public class GeneralConfig extends DummyConfig {
     @ConfigurableProperty(category = "machine", comment = "The distance from which part offsets should be shown.", minimalValue = 1, configLocation = ModConfig.Type.SERVER)
     public static int partOffsetRenderDistance = 16;
 
+    @ConfigurableProperty(category = "machine", comment = "The maximum values that Part Offset items will have when dropped from a broken part.", minimalValue = 1, configLocation = ModConfig.Type.SERVER)
+    public static int enchancementOffsetPartDropValue = 4;
+
     public GeneralConfig() {
         super(IntegratedDynamics._instance, "general");
     }
