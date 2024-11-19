@@ -37,12 +37,7 @@ import org.cyclops.integrateddynamics.core.blockentity.BlockEntityMultipartTicki
 import org.cyclops.integrateddynamics.core.inventory.container.ContainerAspectSettings;
 import org.cyclops.integrateddynamics.core.inventory.container.ContainerPartSettings;
 import org.cyclops.integrateddynamics.core.item.ItemBlockEnergyContainer;
-import org.cyclops.integrateddynamics.core.recipe.type.RecipeDryingBasin;
-import org.cyclops.integrateddynamics.core.recipe.type.RecipeEnergyContainerCombination;
-import org.cyclops.integrateddynamics.core.recipe.type.RecipeMechanicalDryingBasin;
-import org.cyclops.integrateddynamics.core.recipe.type.RecipeMechanicalSqueezer;
-import org.cyclops.integrateddynamics.core.recipe.type.RecipeNbtClear;
-import org.cyclops.integrateddynamics.core.recipe.type.RecipeSqueezer;
+import org.cyclops.integrateddynamics.core.recipe.type.*;
 import org.cyclops.integrateddynamics.entity.item.EntityItemTargetted;
 import org.cyclops.integrateddynamics.inventory.container.*;
 import org.cyclops.integrateddynamics.item.ItemEnhancement;

@@ -21,19 +21,14 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.cyclops.cyclopscore.config.extendedconfig.BlockConfig;
 import org.cyclops.cyclopscore.datastructure.DimPos;
 import org.cyclops.cyclopscore.init.ModBase;
+import org.cyclops.integrateddynamics.GeneralConfig;
 import org.cyclops.integrateddynamics.IntegratedDynamics;
 import org.cyclops.integrateddynamics.RegistryEntries;
 import org.cyclops.integrateddynamics.api.network.INetwork;
 import org.cyclops.integrateddynamics.api.network.INetworkElement;
 import org.cyclops.integrateddynamics.api.network.IPartNetworkElement;
 import org.cyclops.integrateddynamics.api.network.event.INetworkEvent;
-import org.cyclops.integrateddynamics.api.part.IPartContainer;
-import org.cyclops.integrateddynamics.api.part.IPartState;
-import org.cyclops.integrateddynamics.api.part.IPartType;
-import org.cyclops.integrateddynamics.api.part.PartPos;
-import org.cyclops.integrateddynamics.api.part.PartRenderPosition;
-import org.cyclops.integrateddynamics.api.part.PartTarget;
-import org.cyclops.integrateddynamics.api.part.PartTypeAdapter;
+import org.cyclops.integrateddynamics.api.part.*;
 import org.cyclops.integrateddynamics.core.block.IgnoredBlock;
 import org.cyclops.integrateddynamics.core.helper.L10NValues;
 import org.cyclops.integrateddynamics.core.helper.PartHelpers;
@@ -180,9 +175,21 @@ public abstract class PartTypeBase<P extends IPartType<P, S>, S extends IPartSta
 
         // Save enhancements
         if (!saveState && state.getMaxOffset() > 0) {
-            ItemStack itemStack = new ItemStack(RegistryEntries.ITEM_ENHANCEMENT_OFFSET);
-            RegistryEntries.ITEM_ENHANCEMENT_OFFSET.get().setEnhancementValue(itemStack, state.getMaxOffset());
-            itemStacks.add(itemStack);
+            // Drop Part Offset items each with as maximum the GeneralConfig.enchancementOffsetPartDropValue offset value.
+            int remainingOffset = state.getMaxOffset();
+            while (remainingOffset > 0) {
+                int offset;
+                if (remainingOffset < GeneralConfig.enchancementOffsetPartDropValue) {
+                    offset = remainingOffset;
+                } else {
+                    offset = GeneralConfig.enchancementOffsetPartDropValue;
+                }
+                remainingOffset -= offset;
+
+                ItemStack itemStack = new ItemStack(RegistryEntries.ITEM_ENHANCEMENT_OFFSET);
+                RegistryEntries.ITEM_ENHANCEMENT_OFFSET.get().setEnhancementValue(itemStack, offset);
+                itemStacks.add(itemStack);
+            }
         }
     }
 
