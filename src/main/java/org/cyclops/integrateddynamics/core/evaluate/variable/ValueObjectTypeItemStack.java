@@ -74,8 +74,7 @@ public class ValueObjectTypeItemStack extends ValueObjectTypeBase<ValueObjectTyp
 
     @Override
     public ValueItemStack deserialize(ValueDeseralizationContext valueDeseralizationContext, Tag value) {
-        if (value instanceof CompoundTag) {
-            CompoundTag tag = (CompoundTag) value;
+        if (value instanceof CompoundTag tag && !tag.isEmpty()) {
             // Forge returns air for tags with negative count,
             // so we set it to 1 for deserialization and fix it afterwards.
             int realCount = tag.getInt("count");
