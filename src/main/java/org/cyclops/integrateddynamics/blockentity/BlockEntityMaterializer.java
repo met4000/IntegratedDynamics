@@ -71,13 +71,17 @@ public class BlockEntityMaterializer extends BlockEntityActiveVariableBase<Mater
                     net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,
                     (blockEntity, direction) -> {
                         int slot = -1;
-                        switch (direction) {
-                            case DOWN ->  slot = SLOT_WRITE_OUT;
-                            case UP ->    slot = SLOT_WRITE_IN;
-                            case NORTH -> slot = SLOT_READ;
-                            case SOUTH -> slot = SLOT_READ;
-                            case WEST ->  slot = SLOT_READ;
-                            case EAST ->  slot = SLOT_READ;
+                        if (direction != null) {
+                            switch (direction) {
+                                case DOWN -> slot = SLOT_WRITE_OUT;
+                                case UP -> slot = SLOT_WRITE_IN;
+                                case NORTH -> slot = SLOT_READ;
+                                case SOUTH -> slot = SLOT_READ;
+                                case WEST -> slot = SLOT_READ;
+                                case EAST -> slot = SLOT_READ;
+                            }
+                        } else {
+                            slot = SLOT_READ;
                         }
                         return new ItemHandlerSlotMasked(blockEntity.getInventory(), slot);
                     }
